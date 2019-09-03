@@ -11,9 +11,9 @@ import java.util.Arrays;
 
 public class SolutionDao {
 
-    private static final String CREATE_QUERY = "INSERT INTO solution(created, updated, description, exercise_id, user_id) VALUES (?, ?, ?, ?, ?)";
+    private static final String CREATE_QUERY = "INSERT INTO solution(created, updated, description, exercise_id, user_id, comment, grade) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String READ_BY_ID_QUERY = "SELECT * FROM solution WHERE id = ?";
-    private static final String UPDATE_QUERY = "UPDATE solution SET created = ?, updated = ?, description = ?, exercise_id = ?, user_id = ? WHERE id = ?";
+    private static final String UPDATE_QUERY = "UPDATE solution SET created = ?, updated = ?, description = ?, exercise_id = ?, user_id = ?, comment = ?, grade = ? WHERE id = ?";
     private static final String DELETE_QUERY = "DELETE FROM solution WHERE id = ?";
     private static final String FIND_ALL_QUERY = "SELECT * FROM solution";
     private static final String FIND_ALL_BY_USER_ID = "SELECT * FROM solution WHERE user_id = ?";
@@ -27,10 +27,12 @@ public class SolutionDao {
             statement.setString(3, solution.getDescription());
             statement.setInt(4, solution.getExerciseId());
             statement.setInt(5, solution.getUserId());
+            statement.setString(6, solution.getComment());
+            statement.setInt(7, solution.getGrade());
             statement.executeUpdate();
-            ResultSet rs = statement.getGeneratedKeys(); //pobieramy wygenerowany klucz
-            if (rs.next()) { //jeśli jest to tylko jedna kolumna z tym id
-                solution.setId(rs.getInt(1)); //ustawiamy id tej kolumny
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                solution.setId(rs.getInt(1));
             }
             return solution;
 
@@ -54,6 +56,8 @@ public class SolutionDao {
                 solution.setDescription(rs.getString("description"));
                 solution.setExerciseId(rs.getInt("exercise_id"));//podajemy nazwy kolumn z bazy danych
                 solution.setUserId(rs.getInt("user_id"));
+                solution.setComment(rs.getString("comment"));
+                solution.setGrade(rs.getInt("grade"));
                 return solution;
             }
 
@@ -72,6 +76,9 @@ public class SolutionDao {
             statement.setString(3, solution.getDescription());
             statement.setInt(4, solution.getExerciseId());
             statement.setInt(5,solution.getUserId());
+            statement.setString(6, solution.getComment());
+            statement.setInt(7, solution.getGrade());
+            statement.setInt(8, solution.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,19 +108,22 @@ public class SolutionDao {
                 solution.setDescription(rs.getString("description"));
                 solution.setExerciseId(rs.getInt("exercise_id"));
                 solution.setUserId(rs.getInt("user_id"));
-
+                solution.setComment(rs.getString("comment"));
+                solution.setGrade(rs.getInt("grade"));
                 solutions = addToArray(solution, solutions);
             }
 
             System.out.println("All solutions: ");
             for(int i=0; i<solutions.length; i++) {
-                System.out.println(String.format("id: %d, created: %tF, updated: %tF, %s, exercise: %d, user id: %d",
+                System.out.println(String.format("id: %d, created: %tF, updated: %tF, %s, exercise: %d, user id: %d, %s, grade: %d",
                         solutions[i].getId(),
                         solutions[i].getCreated(),
                         solutions[i].getUpdated(),
                         solutions[i].getDescription(),
                         solutions[i].getExerciseId(),
-                        solutions[i].getUserId()
+                        solutions[i].getUserId(),
+                        solutions[i].getComment(),
+                        solutions[i].getGrade()
                 ));
             }
             return solutions;
@@ -137,6 +147,8 @@ public class SolutionDao {
                 userSolution.setDescription(rs.getString("description"));
                 userSolution.setExerciseId(rs.getInt("exercise_id"));
                 userSolution.setUserId(rs.getInt("user_id"));
+                userSolution.setComment(rs.getString("comment"));
+                userSolution.setGrade(rs.getInt("grade"));
 
                 userSolutions = addToArray(userSolution, userSolutions);
             }
@@ -148,7 +160,9 @@ public class SolutionDao {
                         userSolutions[i].getUpdated(),
                         userSolutions[i].getDescription(),
                         userSolutions[i].getExerciseId(),
-                        userSolutions[i].getUserId()
+                        userSolutions[i].getUserId(),
+                        userSolutions[i].getComment(),
+                        userSolutions[i].getGrade()
                 ));
             }
             return userSolutions;
@@ -172,6 +186,8 @@ public class SolutionDao {
                 exerciseSolution.setDescription(rs.getString("description"));
                 exerciseSolution.setExerciseId(rs.getInt("exercise_id"));
                 exerciseSolution.setUserId(rs.getInt("users_id"));
+                exerciseSolution.setComment(rs.getString("comment"));
+                exerciseSolution.setGrade(rs.getInt("grade"));
 
                 exerciseSolutions = addToArray(exerciseSolution, exerciseSolutions);
             }
@@ -184,7 +200,8 @@ public class SolutionDao {
                         exerciseSolutions[i].getUpdated(),
                         exerciseSolutions[i].getDescription(),
                         exerciseSolutions[i].getExerciseId(),
-                        exerciseSolutions[i].getUserId()
+                        exerciseSolutions[i].getUserId(),
+                        exerciseSolutions[i].getComment()
                 ));
             }
             return exerciseSolutions;
