@@ -13,7 +13,7 @@ public class SolutionDao {
 
     private static final String CREATE_QUERY = "INSERT INTO solution(created, updated, description, exercise_id, user_id, comment, grade) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String READ_BY_ID_QUERY = "SELECT * FROM solution WHERE id = ?";
-    private static final String UPDATE_QUERY = "UPDATE solution SET created = ?, updated = ?, description = ?, exercise_id = ?, user_id = ?, comment = ?, grade = ? WHERE id = ?";
+    private static final String UPDATE_QUERY = "UPDATE solution SET updated = ?, description = ?, exercise_id = ?, user_id = ?, comment = ?, grade = ? WHERE id = ?";
     private static final String DELETE_QUERY = "DELETE FROM solution WHERE id = ?";
     private static final String FIND_ALL_QUERY = "SELECT * FROM solution";
     private static final String FIND_ALL_BY_USER_ID = "SELECT * FROM solution WHERE user_id = ?";
@@ -71,14 +71,14 @@ public class SolutionDao {
     public void update(Solution solution) {
         try (Connection conn = DBUtil.createConnection()) {
             PreparedStatement statement = conn.prepareStatement(UPDATE_QUERY);
-            statement.setDate(1, solution.getCreated());
-            statement.setDate(2, solution.getUpdated());
-            statement.setString(3, solution.getDescription());
-            statement.setInt(4, solution.getExerciseId());
-            statement.setInt(5,solution.getUserId());
-            statement.setString(6, solution.getComment());
-            statement.setInt(7, solution.getGrade());
-            statement.setInt(8, solution.getId());
+//            statement.setDate(1, solution.getCreated());
+            statement.setDate(1, solution.getUpdated());
+            statement.setString(2, solution.getDescription());
+            statement.setInt(3, solution.getExerciseId());
+            statement.setInt(4,solution.getUserId());
+            statement.setString(5, solution.getComment());
+            statement.setInt(6, solution.getGrade());
+            statement.setInt(7, solution.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
