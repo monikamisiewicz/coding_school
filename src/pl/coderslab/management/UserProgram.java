@@ -52,7 +52,7 @@ public class UserProgram {
                     System.out.println("Available exercises: ");
                     exerciseDao.findNotAddedByUser(userId);
                     addUserSolution(scanner, userId);
-                    break; //po break przechodzi na początek pętli????
+                    break;
                 case "view":
                     solutionDao.findAllByUserId(userId);
                     break;
