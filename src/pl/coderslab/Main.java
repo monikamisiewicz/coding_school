@@ -33,9 +33,12 @@ public class Main {
 //        solutions.manageSolution();
 
 
-        User user = new User();
-        UserProgram userProgram = new UserProgram(user);
-        userProgram.options();
+//        User user = new User();
+//        UserProgram userProgram = new UserProgram(user);
+//        userProgram.options();
+
+        Evaluation evaluation = new Evaluation();
+        evaluation.evaluateSolution();
 
     }
 }
