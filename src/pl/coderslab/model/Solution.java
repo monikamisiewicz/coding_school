@@ -11,18 +11,22 @@ public class Solution {
     private String description;
     private int exerciseId;
     private int userId;
+    private String comment;
+    private int grade;
 
     //pusty konstruktor
     public Solution() {
     }
 
     //konstruktor ze wszystkimi parametrami bez id
-    public Solution(Date created, Date updated, String description, int exerciseId, int usersId) {
+    public Solution(Date created, Date updated, String description, int exerciseId, int usersId, String comment, int grade) {
         this.created = created;
         this.updated = updated;
         this.description = description;
         this.exerciseId = exerciseId;
         this.userId = usersId;
+        this.comment = comment; //= null;
+        this.grade = grade; // = 0;
     }
 
     //gettery i settery dla wszystkich pól
@@ -72,5 +76,21 @@ public class Solution {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
     }
 }
