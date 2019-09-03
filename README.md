@@ -2,6 +2,7 @@
 CL Coding School
 
 Simple application consisting of following functionalities:
+
 1)
 - managing a new User
 - managing a new Group
