@@ -73,8 +73,8 @@ public class UserProgram {
         System.out.println("Enter exercise id to which you want to add solution: ");
         String description = "";
         int exerciseId = 0;
-        while(true) {
 
+        while(true) {
             while (!scanner.hasNextInt()) {
                 System.out.println("Wrong value. Enter valid exercise id: ");
                 scanner.next();
@@ -90,7 +90,6 @@ public class UserProgram {
             System.out.println("Add solution to the exercise: ");
             description = scanner.nextLine();
             break;
-
         }
 
         Calendar calendar = Calendar.getInstance();
