@@ -71,7 +71,6 @@ public class SolutionDao {
     public void update(Solution solution) {
         try (Connection conn = DBUtil.createConnection()) {
             PreparedStatement statement = conn.prepareStatement(UPDATE_QUERY);
-//            statement.setDate(1, solution.getCreated());
             statement.setDate(1, solution.getUpdated());
             statement.setString(2, solution.getDescription());
             statement.setInt(3, solution.getExerciseId());
@@ -115,7 +114,7 @@ public class SolutionDao {
 
             System.out.println("All solutions: ");
             for(int i=0; i<solutions.length; i++) {
-                System.out.println(String.format("id: %d, created: %tF, updated: %tF, %s, exercise: %d, user id: %d, %s, grade: %d",
+                System.out.println(String.format("id: %d, created: %tF, updated: %tF, %s, exercise id: %d, user id: %d, %s, grade: %d",
                         solutions[i].getId(),
                         solutions[i].getCreated(),
                         solutions[i].getUpdated(),
